@@ -19,7 +19,6 @@ const formatDate = (timestamp) => {
       ];
       let day = days[date.getDay()];
 
-
     return `${day} ${hours}:${minutes}`;
 }
 
@@ -32,8 +31,10 @@ const showRealTemp = (response) => {
     let dateElement = document.querySelector('#date');
     let iconElement = document.querySelector('#icon');
 
+    celsiusTemperature = response.data.main.temp;
+
     cityElement.innerHTML = response.data.name;
-    tempElement.innerHTML = Math.round(response.data.main.temp);
+    tempElement.innerHTML = Math.round(celsiusTemperature);
     descriptionElement.innerHTML = response.data.weather[0].description;
     humidityElement.innerHTML = response.data.main.humidity;
     windElement.innerHTML = Math.round(response.data.wind.speed);
@@ -56,8 +57,32 @@ const handleSubmit = (e) => {
     search(cityInputElement.value);
 };
 
-search("Vienna");
+const showFahrenheitTemperature = (e) => {
+    e.preventDefault;
+    let tempElement = document.querySelector('#temperature');
+    celsiusLink.classList.remove("active");
+    fahrenheitLink.classList.add("active");
+    let fahrenheitTemperature = (celsiusTemperature * 9)/5 + 32;
+    tempElement.innerHTML = Math.round(fahrenheitTemperature);
+};
+
+const showCelsiusTemperature = (e) => {
+    e.preventDefault;
+    celsiusLink.classList.add("active");
+    fahrenheitLink.classList.remove("active");
+    let tempElement = document.querySelector('#temperature');
+    tempElement.innerHTML = Math.round(celsiusTemperature);
+}
+
+let celsiusTemperature = null;
 
 let form = document.querySelector('#search-form');
-
 form.addEventListener("submit", handleSubmit);
+
+let fahrenheitLink = document.querySelector('#fahrenheit-link');
+fahrenheitLink.addEventListener("click", showFahrenheitTemperature);
+
+let celsiusLink = document.querySelector('#celsius-link');
+celsiusLink.addEventListener("click", showCelsiusTemperature);
+
+search("Vienna");

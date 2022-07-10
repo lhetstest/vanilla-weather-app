@@ -62,6 +62,15 @@ h1 {
     line-height: 1;
 }
 
+.weather-temperature .active {
+    color: #333;
+    cursor: default;
+}
+
+.weather-temperature .active:hover {
+    text-decoration: none;
+}
+
 .units {
     font-size: 16px;
     position: relative;
