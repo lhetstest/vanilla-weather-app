@@ -14,12 +14,29 @@
     <div class="container">
         <div class="weather-app-wrapper">
             <div class="weather-app">
+                <form id="search-form" class="mb-5">
+                    <div class="row">
+                        <div class="col-9">
+                            <input 
+                            class="form-control" 
+                            type="text" 
+                            placeholder="Type a city ..." 
+                            id="city-input"
+                            autocomplete="off">
+                        </div>
+                        <div class="col-3">
+                            <input type="submit" value="Search" class="btn btn-primary">
+                        </div>
+                    </div>
+                    
+                    
+                </form>
                 <div class="overview">
                     <h1 id="city"></h1>
                     <!-- <a class="btn btn-primary" href="#">Click me</a> -->
                     <ul>
-                        <li>8 Juli 2022</li>
-                        <li>Saturday</li>
+                        <li id="date"></li>
+                        <li id="month">10 Juli</li>
                         <li id="description"></li>
                     </ul>
                 </div>
@@ -29,7 +46,8 @@
                         <div class="clearfix weather-temperature">
                             <img 
                                 class="float-start"
-                                src="./src/assets/sunny.png" 
+                                id="icon"
+                                src="" 
                                 alt="clear"> 
                             <div>
                                 <strong id="temperature"></strong>
@@ -44,8 +62,8 @@
                     <div class="col-6">
                         <ul>
                             <li>Precipitation: 0%</li>
-                            <li>Humidity: 73%</li>
-                            <li>Wind: 2 km/h</li>
+                            <li>Humidity: <span id="humidity"></span> %</li>
+                            <li>Wind: <span id="wind"></span> km/h</li>
                         </ul>
                     </div>
                 </div>
@@ -75,13 +93,8 @@
                 <a href="https://github.com/lhetstest/vanilla-weather-app">Open source code</a> 
                 by Yuliia Rul
             </small>
-        </div>
-        
-        
-       
-    </div>
-
-    
+        </div>      
+    </div>    
     <script src="./src/app.js"></script>
 </body>
 </html>
