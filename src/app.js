@@ -20,7 +20,40 @@ const formatDate = (timestamp) => {
       let day = days[date.getDay()];
 
     return `${day} ${hours}:${minutes}`;
-}
+};
+
+const displayForecast = (response) => {
+    console.log(response.data.daily);
+    // let date = new Date();
+    let shortWeekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    // let shortWeekDay = shortWeekDays[date.getDay()];
+    let forecastElement = document.querySelector("#forecast");
+    let forecastHTML = "";
+    shortWeekDays.forEach(function (shortWeekDay) {
+        forecastHTML = forecastHTML + `<div class="col-2">
+            <div class="forecast-weekday">${shortWeekDay}</div>
+            <img src="./src/assets/sunny.png" 
+            width="44"
+            alt="clear">
+            <div class="forecast-temperature">
+                <span class="forecast-temperature-day">
+                    18 °
+                </span>
+                <span class="forecast-temperature-night">
+                    12 °
+                </span>    
+            </div> 
+        </div>`;
+    } )
+      
+    forecastElement.innerHTML = forecastHTML;
+};
+
+const getForecast = (coordinates) => {
+    let APIKEY = "bd71345693d3c57b7742e27f41d36a4d";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${APIKEY}&units=metric`;
+    axios.get(apiUrl).then(displayForecast);
+};
 
 const showRealTemp = (response) => {
     let tempElement=document.querySelector('#temperature');
@@ -41,6 +74,7 @@ const showRealTemp = (response) => {
     dateElement.innerHTML = formatDate(response.data.dt * 1000);
     iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`); 
     iconElement.setAttribute("alt", response.data.weather[0].description);
+    getForecast(response.data.coord);
 };
 
 const search = (city) => {
@@ -86,3 +120,4 @@ let celsiusLink = document.querySelector('#celsius-link');
 celsiusLink.addEventListener("click", showCelsiusTemperature);
 
 search("Vienna");
+displayForecast();
