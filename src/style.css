@@ -61,8 +61,8 @@ h1 {
 }
 
 .weather-temperature .active {
-    color: #333;
-    cursor: default;
+    color: rgb(175, 89, 74);
+    
 }
 
 .weather-temperature .active:hover {
